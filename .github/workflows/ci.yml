@@ -1,0 +1,46 @@
+name: PHP Syntax & Lint CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  php-lint:
+    name: Check PHP Syntax (php -l)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP Environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_mysql
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHP Syntax Check (php -l)
+        run: |
+          echo "Bắt đầu kiểm tra cú pháp toàn bộ file PHP trong dự án..."
+          errors=0
+          while IFS= read -r -d '' file; do
+            if ! php -l "$file"; then
+              echo "::error file=$file::Lỗi cú pháp PHP tại $file"
+              errors=$((errors + 1))
+            fi
+          done < <(find . -type d -name "vendor" -prune -o -type f -name "*.php" -print0)
+
+          if [ $errors -gt 0 ]; then
+            echo "Phát hiện $errors file bị lỗi cú pháp PHP!"
+            exit 1
+          fi
+
+          echo "Tất cả các file PHP đều hợp lệ và không có lỗi cú pháp!"

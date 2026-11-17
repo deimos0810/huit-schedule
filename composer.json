@@ -1,0 +1,21 @@
+{
+    "name": "huit/schedule-hub",
+    "description": "HUIT Schedule Hub - Smart multi-campus teaching schedule management",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HUIT Dev",
+            "email": "admin@huit.edu.vn"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.8",
+        "fakerphp/faker": "^1.24"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
