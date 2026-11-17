@@ -1,5 +1,19 @@
+DirectoryIndex public/index.php index.php
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{REQUEST_URI} !^/public/
+
+    # Redirect root to public
+    RewriteRule ^$ public/ [L]
+
+    # If the file or directory exists directly in root, serve it
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Avoid infinite loop if already in public
+    RewriteRule ^public/ - [L]
+
+    # Rewrite non-existing requests into public
     RewriteRule ^(.*)$ public/$1 [L,QSA]
 </IfModule>

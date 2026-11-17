@@ -77,7 +77,7 @@ $loginType = $_GET['type'] ?? 'admin';
                         <label class="form-label small fw-semibold text-muted">Email Giảng viên</label>
                         <div class="input-group">
                             <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
-                            <input type="email" name="email" class="form-control" placeholder="vd: gv@huit.edu.vn" value="an.nguyen1@huit.edu.vn" required autofocus>
+                            <input type="email" name="email" class="form-control" placeholder="vd: gv@huit.edu.vn" value="yen.dang1@huit.edu.vn" required autofocus>
                         </div>
                         <div class="form-text small">Email công tác do trường cấp kết thúc bằng @huit.edu.vn</div>
                     </div>
@@ -102,7 +102,7 @@ $loginType = $_GET['type'] ?? 'admin';
                 <?php if ($loginType === 'admin'): ?>
                     <div>• <strong>Tài khoản:</strong> <code>admin</code> | <strong>Mật khẩu:</strong> <code>admin123</code></div>
                 <?php else: ?>
-                    <div>• <strong>Email GV:</strong> <code>an.nguyen1@huit.edu.vn</code> (hoặc xem danh sách GV)</div>
+                    <div>• <strong>Email GV:</strong> <code>yen.dang1@huit.edu.vn</code> (hoặc xem danh sách GV)</div>
                     <div>• <strong>Mật khẩu:</strong> <code>123456</code></div>
                 <?php endif; ?>
             </div>

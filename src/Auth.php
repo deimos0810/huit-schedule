@@ -37,8 +37,8 @@ class Auth {
         $pdo = Database::getConnection();
 
         // Check in users table (Admin/Staff)
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :login OR email = :login LIMIT 1");
-        $stmt->execute(['login' => $usernameOrEmail]);
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :login1 OR email = :login2 LIMIT 1");
+        $stmt->execute(['login1' => $usernameOrEmail, 'login2' => $usernameOrEmail]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
